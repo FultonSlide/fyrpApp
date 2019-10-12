@@ -26,12 +26,12 @@ steps:
 - task: Npm@1
   inputs:
     command: 'install'
-    workingDir: 'fyrpSol'
+    workingDir: 'C:\Users\Will\source\repos\fyrpSol'
 
 - task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: 'fyrpSol'
+    workingDir: 'C:\Users\Will\source\repos\fyrpSol'
     customCommand: 'run build'
 
 - task: NuGetCommand@2
