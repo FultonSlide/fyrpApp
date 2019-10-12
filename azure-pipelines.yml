@@ -26,12 +26,10 @@ steps:
 - task: Npm@1
   inputs:
     command: 'install'
-    workingDir: 'FultonSlide/FyrpSol'
 
 - task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: 'FultonSlide'
     customCommand: 'run build'
 
 - task: NuGetCommand@2
