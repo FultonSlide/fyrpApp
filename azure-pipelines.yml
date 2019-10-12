@@ -26,12 +26,12 @@ steps:
 - task: Npm@1
   inputs:
     command: 'install'
-    workingDir: 'FultonSlide/fyrpApp'
+    workingDir: 'FultonSlide'
 
 - task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: 'FultonSlide/fyrpApp'
+    workingDir: 'FultonSlide'
     customCommand: 'run build'
 
 - task: NuGetCommand@2
