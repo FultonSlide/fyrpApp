@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[1.1.1, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "(, )"
+            },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
               "version": "[1.1.2, )"
@@ -55,10 +59,6 @@
             "Microsoft.AspNetCore.StaticFiles": {
               "target": "Package",
               "version": "[1.1.1, )"
-            },
-            "Microsoft.TypeScript.MSBuild": {
-              "target": "Package",
-              "version": "[3.6.3, )"
             }
           },
           "imports": [

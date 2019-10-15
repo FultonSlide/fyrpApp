@@ -17,5 +17,12 @@ namespace fyrpSol
         {
             return new string[] { "R2", "D2", "C", "3", "P0" };
         }
-    }
+
+        // POST: api/<controller>
+        [HttpPost]
+        public IEnumerable<string> Post(object value)
+        {
+          return new string[] {};
+        }
+  }
 }
