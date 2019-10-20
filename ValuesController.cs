@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace fyrpSol
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class ValuesController : Controller
     {
         // GET: api/<controller>
@@ -20,9 +21,9 @@ namespace fyrpSol
 
         // POST: api/<controller>
         [HttpPost]
-        public IEnumerable<string> Post(object value)
+        public IActionResult Post([FromBody] LoginDetailsClass details)
         {
-          return new string[] {};
+            return Json(details);
         }
   }
 }
