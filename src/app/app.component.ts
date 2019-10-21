@@ -11,9 +11,8 @@ export class AppComponent implements OnInit {
     apiValues: string[] = [];
 
     ngOnInit() {
-        if (window.location.href == 'http://localhost:4200/') {
+        if (window.location.href == 'https://fyrpapp.azurewebsites.net/') {
             this.router.navigate(['/login']);
         }
-        
     }
 }
