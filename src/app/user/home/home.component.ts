@@ -60,7 +60,6 @@ export class HomeComponent implements OnInit {
             }
         });
 
-        // Add
         this.agoraService.client.on('stream-added', (evt) => {
             const stream = evt.stream;
             this.agoraService.client.subscribe(stream, (err) => {
@@ -68,14 +67,12 @@ export class HomeComponent implements OnInit {
             });
         });
 
-        // Add
         this.agoraService.client.on('stream-subscribed', (evt) => {
             const stream = evt.stream;
             if (!this.remoteCalls.includes(`agora_remote${stream.getId()}`)) this.remoteCalls.push(`agora_remote${stream.getId()}`);
             setTimeout(() => stream.play(`agora_remote${stream.getId()}`), 2000);
         });
 
-        // Add
         this.agoraService.client.on('stream-removed', (evt) => {
             const stream = evt.stream;
             stream.stop();
@@ -83,7 +80,6 @@ export class HomeComponent implements OnInit {
             console.log(`Remote stream is removed ${stream.getId()}`);
         });
 
-        // Add
         this.agoraService.client.on('peer-leave', (evt) => {
             const stream = evt.stream;
             if (stream) {

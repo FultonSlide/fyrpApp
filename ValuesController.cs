@@ -21,9 +21,15 @@ namespace fyrpSol
 
         // POST: api/<controller>
         [HttpPost]
-        public IActionResult Post([FromBody] LoginDetailsClass details)
+        public String Post([FromBody]LoginDetailsClass details)
         {
-            return Json(details);
+            if (details.username == "WillQ" && details.password == "1234")
+            {
+                return "Login Success";
+            } else
+            {
+                return "Login Error";
+            }
         }
   }
 }

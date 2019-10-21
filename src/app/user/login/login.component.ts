@@ -3,6 +3,11 @@ import { Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
 
+export interface Details {
+    username: string,
+    password: string
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +17,7 @@ export class LoginComponent implements OnInit {
     loginDetails: any;
     usernameValue: string;
     passwordValue: string;
-    loginReturnStatus: string;
+    loginReturnStatus: any;
 
     constructor(private _httpService: Http, private router: Router) { }
 
@@ -31,19 +36,23 @@ export class LoginComponent implements OnInit {
             password: this.passwordValue
         }
 
-        let loginDetailsJSON = JSON.stringify(this.loginDetails);
+        let details: Details = {username: null, password: null};
 
-        console.log(loginDetailsJSON);
+        details.username = this.usernameValue;
+        details.password = this.passwordValue;
+
+        console.log(details);
 
         const headers: HttpHeaders = new HttpHeaders();
         headers.set('Content-Type', 'application/json');
 
-        this._httpService.post('/api/values', loginDetailsJSON).subscribe(values => {
-            console.log(values.json());
-            this.loginReturnStatus = values.json();
+        this._httpService.post('/api/values', details).subscribe(values => {
+            console.log('return from api');
+            console.log(values);
+            this.loginReturnStatus = values;
         });
 
-        if (this.loginReturnStatus) {
+        if (this.loginReturnStatus == "Login Success") {
             this.router.navigate(['/home']);
         } else {
             //return login error msg.
