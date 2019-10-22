@@ -19,6 +19,12 @@ export class HomeComponent implements OnInit {
         this.agoraService.createClient();
     }
 
+    refresh() {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate(['/home']);
+    }
+
     startCall() {
         this.agoraService.client.join(null, '1000', null, (uid) => {
             this.localStream = this.agoraService.createStream(uid, true, null, null, true, false);
