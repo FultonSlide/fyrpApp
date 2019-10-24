@@ -47,10 +47,17 @@ export class LoginComponent implements OnInit {
         headers.set('Content-Type', 'application/json');
 
         this._httpService.post('/api/values', details).subscribe(values => {
-            console.log('return from api');
+            console.log('returned from api:');
             console.log(values);
             this.loginReturnStatus = values;
         });
+
+        //let sender: Object = '';
+        //let e: any = '';
+        //this._httpService.put('/api/values', sender).subscribe(values => {
+        //    console.log('putted');
+        //    console.log(values)
+        //});
 
         if (this.loginReturnStatus == "Login Success") {
             this.router.navigate(['/home']);

@@ -43,3 +43,5 @@ C:\Users\Will\source\repos\fyrpSol\obj\Debug\netcoreapp3.0\fyrpSol.csproj.CopyCo
 C:\Users\Will\source\repos\fyrpSol\obj\Debug\netcoreapp3.0\fyrpSol.dll
 C:\Users\Will\source\repos\fyrpSol\obj\Debug\netcoreapp3.0\fyrpSol.pdb
 C:\Users\Will\source\repos\fyrpSol\bin\Debug\netcoreapp3.0\proxy.config.json
+C:\Users\Will\source\repos\fyrpSol\bin\Debug\netcoreapp3.0\NationalInstruments.Common.dll
+C:\Users\Will\source\repos\fyrpSol\bin\Debug\netcoreapp3.0\NationalInstruments.DAQmx.dll
