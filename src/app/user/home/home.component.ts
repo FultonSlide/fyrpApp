@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { AngularAgoraRtcService, Stream } from 'angular-agora-rtc';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -20,14 +21,62 @@ export class HomeComponent implements OnInit {
     }
 
     stop() {
-        this._httpService.get('/api/values', '').subscribe(values => {
-            console.log('stopping...');
+        const headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8' });
+        const options = new RequestOptions({ headers: headers });
+        let token = 'stop';
+
+        this._httpService.post('/api/values', `"${token}"`, {
+            headers: headers
+        }).subscribe(values => {
+            console.log('Stopping...');
         });
     }
 
     forward() {
-        this._httpService.post('/api/values', '').subscribe(values => {
-            console.log('forward...');
+        const headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8' });
+        const options = new RequestOptions({ headers: headers });
+        let token = 'forward';
+
+        this._httpService.post('/api/values', `"${token}"`, {
+            headers: headers
+        }).subscribe(values => {
+            console.log('Going forward...');
+        });
+    }
+
+    backward() {
+        const headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8' });
+        const options = new RequestOptions({ headers: headers });
+        let token = 'backward';
+
+        this._httpService.post('/api/values', `"${token}"`, {
+            headers: headers
+        }).subscribe(values => {
+            console.log('Going backward...');
+        });
+    }
+
+    left() {
+        const headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8' });
+        const options = new RequestOptions({ headers: headers });
+        let token = 'left';
+
+        this._httpService.post('/api/values', `"${token}"`, {
+            headers: headers
+        }).subscribe(values => {
+            console.log('Going left...');
+        });
+    }
+
+    right() {
+        const headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8' });
+        const options = new RequestOptions({ headers: headers });
+        let token = 'right';
+
+        this._httpService.post('/api/values', `"${token}"`, {
+            headers: headers
+        }).subscribe(values => {
+            console.log('Going right...');
         });
     }
 
