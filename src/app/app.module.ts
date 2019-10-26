@@ -5,6 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { AngularAgoraRtcModule, AgoraConfig } from 'angular-agora-rtc';
+import { AngularFireModule } from "angularfire2";
+import { AngularFireDatabaseModule } from "angularfire2/database";
+import { AngularFireAuthModule } from "angularfire2/auth";
+
+import { environment } from "../environments/environment";
 
 import { AppRoutingModule, routingComponents, appRoutes } from './app-routing.module';
 
@@ -22,7 +27,10 @@ const agoraConfig: AgoraConfig = {
         FormsModule,
         HttpModule,
         RouterModule.forRoot(appRoutes),
-        AngularAgoraRtcModule.forRoot(agoraConfig)
+        AngularAgoraRtcModule.forRoot(agoraConfig),
+        AngularFireModule.initializeApp(environment.firebase, environment.appName),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule
     ],
     providers: [],
     bootstrap: [AppComponent]
