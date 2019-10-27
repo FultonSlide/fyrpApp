@@ -30,7 +30,7 @@ declare let RTCPeerConnection: any;
 })
 export class HomeComponent implements OnInit {
     pc: any;
-    channel: AngularFireList<any[]>;
+    channel: AngularFireList<any>;
     database: firebase.database.Reference;
     user: firebase.User;
     senderId: string;
@@ -145,6 +145,29 @@ export class HomeComponent implements OnInit {
             (this.remote.nativeElement.srcObject = event.streams[0]); // use ontrack
 
         this.showMe();
+        this.showRemote();
+
+        //window.setInterval(function () {
+        //    RTCPeerConnection.getStats(null).then(stats => {
+        //        let statsOutput = "";
+
+        //        stats.forEach(report => {
+        //            statsOutput += `<h2>Report: ${report.type}</h3>\n<strong>ID:</strong> ${report.id}<br>\n` +
+        //                `<strong>Timestamp:</strong> ${report.timestamp}<br>\n`;
+
+        //            // Now the statistics for this report; we intentially drop the ones we
+        //            // sorted to the top above
+
+        //            Object.keys(report).forEach(statName => {
+        //                if (statName !== "id" && statName !== "timestamp" && statName !== "type") {
+        //                    statsOutput += `<strong>${statName}:</strong> ${report[statName]}<br>\n`;
+        //                }
+        //            });
+        //        });
+
+        //        document.querySelector(".stats-box").innerHTML = statsOutput;
+        //    });
+        //}, 1000);
     }
 
     sendMessage(senderId, data) {
