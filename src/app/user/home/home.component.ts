@@ -80,10 +80,16 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    refresh() {
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['/home']);
+    leaveCall() {
+        this.agoraService.client.leave(function() {
+            console.log("client leaves channel");
+            //client ends call
+        }, function (err) {
+            console.log("client leave failed ", err);
+            //error handling
+        });
+
+        this.localStream.stop('agora_local');
     }
 
     startCall() {
