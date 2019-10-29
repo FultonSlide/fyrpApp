@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AngularAgoraRtcService, Stream } from 'angular-agora-rtc';
-import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -13,11 +12,21 @@ export class HomeComponent implements OnInit {
 
     localStream: Stream
     remoteCalls: any = [];
+    vidyoConnector: any;
+    VC: any;
 
     constructor(private _httpService: Http, private router: Router, private agoraService: AngularAgoraRtcService) { }
 
     ngOnInit() {
         this.agoraService.createClient();
+        this.loadVidyoClientLibrary();
+    }
+
+    ngAfterInit() {
+        let status = {
+            state: "READY",
+        }
+        this.onVidyoClientLoaded(status);
     }
 
     stop() {
@@ -79,6 +88,76 @@ export class HomeComponent implements OnInit {
             console.log('Going right...');
         });
     }
+
+    //Vidyo
+    loadVidyoClientLibrary() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://static.vidyo.io/4.1.12.8/javascript/VidyoClient/VidyoClient.js?onload=onVidyoClientLoaded&webrtc=1&plugin=0';
+        document.getElementsByTagName('head')[0].appendChild(script);
+        console.log('loadVidyo');
+    }
+
+    onVidyoClientLoaded(status) {
+        switch (status.state) {
+            case "READY":
+                console.log('onVidyoClientLoaded');
+                var event = new CustomEvent('vidyoclient:ready', { detail: this.VC });
+                document.dispatchEvent(event);
+                break;
+            case "RETRYING":             // The library operating is temporarily paused
+                break;
+            case "FAILED":               // The library operating has stopped
+                break;
+            case "FAILEDVERSION":
+                break;
+            case "NOTAVAILABLE":         // The library is not available
+                break;
+        }
+        return true;                   // Return true to reload the plugins if not available
+    }
+
+    listenEvent() {
+        document.addEventListener('vidyoclient:ready', (e: any) => {
+            this.setupVidyoClient(e.detail);
+            console.log('listenEvent');
+        });
+    }
+
+    setupVidyoClient(VC) {
+        console.log('setupVidyoClient');
+        VC.CreateVidyoConnector({
+            viewId: "renderer",   // HTML Div ID where the composited video will be rendered
+            viewStyle: "VIDYO_CONNECTORVIEWSTYLE_Default", // Visual style of the composited renderer
+            remoteParticipants: 16,                // Maximum number of participants
+            logFileFilter: "warning all@VidyoConnector info@VidyoClient",
+            logFileName: "",
+            userData: ""
+        }).then((vidyoConnector) => {
+            this.vidyoConnector = vidyoConnector; // Save the vidyoConnector instance for later use
+        }).catch(() => {
+            console.error("CreateVidyoConnector Failed");
+        });
+    }
+
+    joinCall() {
+        this.vidyoConnector.Connect({
+            host: "prod.vidyo.io",  // Server name, for most production apps it will be prod.vidyo.io
+            token: "cHJvdmlzaW9uAFd2cUBiZGVkNWMudmlkeW8uaW8ANjM3Mzk1MjY3MTYAAGRhYWY4MDY5OWFlZDEyNzA3MzY1OTA4ZWExMjA0ODViODlhNTFkMzZiMGVkOWE1NmY0MGVlNWUzMThjNzc0NjlkYzFkYzEyMmMzNTQxZjdmMWRlNmQ2MmU3NDhmOTFmYQ==",          // Add generated token (https://developer.vidyo.io/documentation/4-1-16-8/getting-started#Tokens)
+            displayName: "WillQTest",  // Display name
+            resourceId: "demoRoom", // Room name
+            onSuccess: function () {
+                console.log("Connected!! YAY!");
+            },
+            onFailure: function (reason) {
+                console.error("Connection failed");
+            },
+            onDisconnected: function (reason) {
+                console.log(" disconnected - " + reason);
+            }
+        })
+    }
+    //AgoraRTC
 
     leaveCall() {
         this.agoraService.client.leave(function() {
