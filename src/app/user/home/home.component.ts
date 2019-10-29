@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AngularAgoraRtcService, Stream } from 'angular-agora-rtc';
-import { HttpParams } from '@angular/common/http';
+import Peer from "peerjs"
 
 @Component({
   selector: 'app-home',
@@ -13,11 +13,14 @@ export class HomeComponent implements OnInit {
 
     localStream: Stream
     remoteCalls: any = [];
+    peer: any;
 
     constructor(private _httpService: Http, private router: Router, private agoraService: AngularAgoraRtcService) { }
 
     ngOnInit() {
         this.agoraService.createClient();
+
+        this.peer = new Peer({ key: 'lwjd5qra8257b9' });
     }
 
     stop() {

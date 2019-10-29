@@ -1,4 +1,5 @@
 {
+  "esModuleInterop": true,
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "src",
