@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AngularAgoraRtcService, Stream } from 'angular-agora-rtc';
-import { HttpParams } from '@angular/common/http';
+import {  } from 'agora-rtm-sdk';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
     localStream: Stream
     remoteCalls: any = [];
+    isVideosVisible: any = false;
 
     constructor(private _httpService: Http, private router: Router, private agoraService: AngularAgoraRtcService) { }
 
@@ -81,6 +82,7 @@ export class HomeComponent implements OnInit {
     }
 
     leaveCall() {
+        this.isVideosVisible = false;
         this.agoraService.client.leave(function() {
             console.log("client leaves channel");
             //client ends call
@@ -93,6 +95,7 @@ export class HomeComponent implements OnInit {
     }
 
     startCall() {
+        this.isVideosVisible = true;
         this.agoraService.client.join(null, '1000', null, (uid) => {
             this.localStream = this.agoraService.createStream(uid, true, null, null, true, false);
             this.localStream.setVideoProfile('720p_3');
