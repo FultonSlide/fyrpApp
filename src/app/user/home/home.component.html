@@ -1,59 +1,59 @@
-<div class="container">
-
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="d-flex justify-content-center my-3">
-          <div id="agora_local">
+<div class="row">
+  <div class="col-sm-7 ml-lg-5">
+    <div class="card">
+      <div class="d-flex justify-content-center my-3">
+        <div class="remote-containers">
+          <div class="remote_calls" *ngFor="let remote of remoteCalls;" [id]="remote" class="col-9 col-lg-12">
           </div>
-        </div>
-        <div class="card-block">
-          <h4 class="card-title text-center">Local Stream</h4>
         </div>
       </div>
-    </div>
-    <div class="col-sm-3"></div>
-    <div class="col-sm-3">
-      <div class="card">
-        <div class="d-flex justify-content-center my-3 mx-3">
-          <div class="remote-containers">
-            <div class="remote_calls" *ngFor="let remote of remoteCalls;" [id]="remote">
-            </div>
-          </div>
-        </div>
-        <div class="card-block">
-          <h4 class="card-title text-center">Remote Stream</h4>
-        </div>
+      <div class="card-block">
+        <h4 class="card-title text-center">Remote Stream</h4>
       </div>
     </div>
   </div>
+  <div class="col-sm-1"></div>
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="d-flex justify-content-center my-3 mx-3">
+        <div id="agora_local" class="col-12 col-lg-12">
+        </div>
+      </div>
+      <div class="card-block">
+        <h4 class="card-title text-center">Local Stream</h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
 
   <div class="row">
     <div class="container">
       <div class="d-flex justify-content-center">
-        <button class="btn btn-light col-sm-2 mx-5 my-3" (click)=startCall()>Start Call</button>
-        <button class="btn btn-light col-sm-2 mx-5 my-3" (click)=leaveCall()>End Call</button>
+        <button class="btn btn-outline-success col-sm-2 mx-5 my-3" (click)=startCall()>Start Call</button>
+        <button class="btn btn-outline-danger col-sm-2 mx-5 my-3" (click)=leaveCall()>End Call</button>
       </div>
     </div>
   </div>
 
   <div class="container">
     <div class="row">
-      <div class="col-sm-5"></div>
-      <button class="btn btn-primary col-sm-2" (click)=forward()>Forward</button>
-      <div class="col-sm-5"></div>
+      <div class="col-lg-5 col-5"></div>
+      <button class="btn btn-primary col-lg-2 col-2" (click)=forward()><i class="fas fa-arrow-circle-up"></i></button>
+      <div class="col-lg-5 col-5"></div>
     </div>
     <div class="row">
-      <div class="col-sm-3"></div>
-      <button class="btn btn-primary col-sm-2" (click)=left()>Left</button>
-      <button class="btn btn-danger col-sm-2" (click)=stop()>Stop</button>
-      <button class="btn btn-primary col-sm-2" (click)=right()>Right</button>
-      <div class="col-sm-3"></div>
+      <div class="col-lg-3 col-3"></div>
+      <button class="btn btn-primary col-lg-2 col-2" (click)=left()><i class="fas fa-arrow-circle-left"></i></button>
+      <button class="btn btn-danger col-lg-2 col-2" (click)=stop()><i class="fas fa-hand-paper"></i></button>
+      <button class="btn btn-primary col-lg-2 col-2" (click)=right()><i class="fas fa-arrow-circle-right"></i></button>
+      <div class="col-lg-3 col-3"></div>
     </div>
     <div class="row">
-      <div class="col-sm-5"></div>
-      <button class="btn btn-primary col-sm-2" (click)=backward()>Backward</button>
-      <div class="col-sm-5"></div>
+      <div class="col-lg-5 col-5"></div>
+      <button class="btn btn-primary col-lg-2 col-2" (click)=backward()><i class="fas fa-arrow-circle-down"></i></button>
+      <div class="col-lg-5 col-5"></div>
     </div>
   </div>
 
